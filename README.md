@@ -1,6 +1,5 @@
 # React + TypeScript + Vite + gRPC(connect) + mui + React Hook Form + Zod
 
-# proto
 # proto root
 npx buf mod init
 npx buf mod update
