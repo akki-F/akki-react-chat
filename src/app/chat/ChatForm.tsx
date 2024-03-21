@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import Grid from "@mui/material/Unstable_Grid2";
-import { Box, Button, Card, CardContent, CardHeader, TextField } from "@mui/material";
+import { Box, Button, Card, CardContent, CardHeader } from "@mui/material";
 import "dayjs/locale/ja";
 import { FormProvider, SubmitHandler, UseFormReturn } from "react-hook-form";
 import { useGetChatMessages } from "../../fooks/useApi";
@@ -9,6 +9,7 @@ import { saveChatMessage } from "../../util/grpcClientUtil";
 import ChatPartnerForm from "./ChatPartnerForm";
 import ChatSelfForm from "./ChatSelfForm";
 import { SaveChatMessage } from "./validation";
+import { TextField } from "../../component/TextField";
 
 
 const MessageForm = () => {
@@ -33,6 +34,7 @@ const MessageForm = () => {
   } = methods;
 
   const onSubmit: SubmitHandler<SaveChatMessage.FormType> = async (data: SaveChatMessage.FormType) => {
+    console.log('data',data);
     saveChatMessage({
       chat: {
         chatCode: "test",
