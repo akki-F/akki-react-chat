@@ -1,0 +1,12 @@
+version: v1
+plugins:
+  - plugin: buf.build/bufbuild/es:v1.3.3 
+    opt: 
+      - target=ts
+      - import_extension=.ts
+    out: gen
+  - plugin: buf.build/connectrpc/es:v1.1.2
+    opt: 
+      - target=ts
+      - import_extension=.ts 
+    out: gen
