@@ -10,6 +10,7 @@ import ChatPartnerForm from "./ChatPartnerForm";
 import ChatSelfForm from "./ChatSelfForm";
 import { SaveChatMessage } from "./validation";
 import { TextField } from "../../component/TextField";
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const MessageForm = () => {
@@ -28,25 +29,27 @@ const MessageForm = () => {
     scrollToEnd();
   }, [messages]);
 
+  const { user } = useAuth0();
+
   const {
     handleSubmit,
     formState: { errors },
   } = methods;
 
   const onSubmit: SubmitHandler<SaveChatMessage.FormType> = async (data: SaveChatMessage.FormType) => {
-    console.log('data',data);
+    console.log('data', data);
     saveChatMessage({
       chat: {
         chatCode: "test",
         messageSeq: data.chat.messageSeq,
         messageContent: data.chat.messageContent,
-        picName: "akkiF",
+        picName: user?.email ?? "test",
       },
       user: {
-        createdUser: null,
-        createdFunc: null,
-        updatedUser: null,
-        updatedFunc: null,
+        createdUser: user?.name ?? "test",
+        createdFunc: user?.email ?? "",
+        updatedUser: user?.name ?? "test",
+        updatedFunc: user?.email ?? "",
       }
     });
   };
@@ -58,7 +61,7 @@ const MessageForm = () => {
         <CardContent>
           <Card variant="outlined" sx={{ my: 3 }}>
             <CardContent id='scroll-inner' sx={{ height: 300, overflowY: "scroll", position: "relative" }}>
-              {messages.chatMessage?.map(em => em.picName != "akkiF" ? <ChatPartnerForm em={em} /> : <ChatSelfForm em={em} />)}
+              {messages.chatMessage?.map(em => em.picName != user?.email ? <ChatPartnerForm em={em} /> : <ChatSelfForm em={em} />)}
             </CardContent>
           </Card>
           <FormProvider {...methods}>

@@ -17,3 +17,6 @@ npm install dayjs
 
 # React Hook Form + Zod
 npm install @hookform/resolvers zod
+
+# auth0-react
+npm install @auth0/auth0-react
